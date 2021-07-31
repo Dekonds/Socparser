@@ -7,4 +7,4 @@ python-dateutil==    1.5
 requests ==          2.26.0
 setuptools==         57.1.0
 soupsieve   ==       2.2.1
-urllib3  ==          1.26.6g
+urllib3  ==          1.26.6
