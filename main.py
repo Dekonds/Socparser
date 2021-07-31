@@ -54,7 +54,13 @@ def parse():
     html = get_html(url)
     get_content(html.text)
 
+
+def main():
+    while 10 > 1:
+        parse()
+        gc.collect()
+
 print("")
 
-parse()
+main()
 
