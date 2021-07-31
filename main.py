@@ -29,7 +29,7 @@ def get_content(html):
     now = datetime.datetime.now()
     if (len(classes) == 0):
         print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits "+"Memory  " )
-        time.sleep(10)
+        time.sleep(300)
         gc.collect()
         #parse()
         return
