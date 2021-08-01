@@ -55,7 +55,13 @@ def parse():
     get_content(html.text)
 
 
+def getip():
+    html = get_html("https://ipwhois.app/json/")
+    print(html.text.split('"')[3])
+
+
 def main():
+    getip()
     while 10 > 1:
         parse()
         gc.collect()
