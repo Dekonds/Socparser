@@ -94,9 +94,9 @@ def getip():
 
 def main():
     getip()
-    # while 10 > 1:
-    # parse()
-    # gc.collect()
+    while 10 > 1:
+            parse()
+            gc.collect()
 
 
 print("")
