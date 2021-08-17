@@ -1,7 +1,8 @@
 import datetime
 import time
 import gc
-import requestsa
+import requests
+import json
 from bs4 import BeautifulSoup
 
 
