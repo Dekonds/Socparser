@@ -24,19 +24,20 @@ def get_html(url, params=None):
     return r
 
 
-def get_html_ip(url, params=None):   
+def get_html_ip(url, params=None):
     s = requests.Session()
-    r = s.get(url, 
+    r = s.get(url,
               headers=HEADERs
               )
     return r
+
 
 def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find_all("div", class_="left")
     now = datetime.datetime.now()
     if (len(classes) == 0):
-        print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits" )
+        print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits")
         time.sleep(200)
         gc.collect()
         return
@@ -47,24 +48,24 @@ def get_content(html):
         get_html(link + "&act=redirect")
         time.sleep(10)
     else:
-        print(str(now.hour)+ ":" + str(now.minute) + ":" + str(now.second) + " " + link + " " + typeoflink)
+        print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " " + link + " " + typeoflink)
         get_html(link + "&act=redirect")
         time.sleep(int(typeoflink) + 10)
-    #get_html(link + "&act=redirect")
-    #print("Memory " + str(memory_usage()))
+    # get_html(link + "&act=redirect")
+    # print("Memory " + str(memory_usage()))
     gc.collect()
-    #parse()
+    # parse()
     # f = open('parse.html', 'w', encoding='utf-8')
 
 
 def get_content_username(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find("span", class_="username")
-    print("username on site "+classes.contents[0])
-    
+    print("username on site " + classes.contents[0])
+
 
 def parse():
-    #print(coutofparser)
+    # print(coutofparser)
     url = 'https://socpublic.com/account/visit.html'
     html = get_html(url)
     get_content(html.text)
@@ -73,7 +74,7 @@ def parse():
 
 def getip():
     html = get_html_ip("https://ipwhois.app/json/")
-    ip_json= json.loads(html.text)
+    ip_json = json.loads(html.text)
     print(ip_json['latitude'])
     print(html.text.split('"')[3])
     f = open('cfg', 'r')
@@ -81,21 +82,24 @@ def getip():
     cfg_file = strings.split("\n")
     for s in cfg_file:
         file_line = s.split(" ")
-        if(cfg_file[0] in str(ip_json['latitude'])):
+        # print(file_line[0]+" "+str(ip_json['latitude']))
+        # print(str(file_line[0]) == str(ip_json['latitude']))
+        if (file_line[0] in str(ip_json['latitude'])):
             global coutofparser
             coutofparser = cfg_file.index(s)
-            print("Logging as "+asdf[1])
+            print("Logging as " + file_line[1])
     html2 = get_html('https://socpublic.com/account/visit.html')
     get_content_username(html2.text)
-    
-    
+
+
 def main():
     getip()
-    #while 10 > 1:
-        #parse()
-        #gc.collect()
+    # while 10 > 1:
+    # parse()
+    # gc.collect()
 
 
 print("")
 main()
+
 
