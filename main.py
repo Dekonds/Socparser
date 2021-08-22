@@ -21,8 +21,8 @@ def get_html(url, params=None):
     s = requests.Session()
     r = s.get(url, \
               cookies={
-                  'session_id': '1952AD09-578E-FCDB-62BC-C71C86E74CBC',  #'1952AD09-578E-FCDB-62BC-C71C86E74CBC', splitss[coutofparser].split(" ")[2]
-                  'secret': 'EEC5222B-AEFE-96B3-9125-1928512E7C5B'      #'EEC5222B-AEFE-96B3-9125-1928512E7C5B' splitss[coutofparser].split(" ")[3]
+                  'session_id': '8FBABDE6-234F-1F13-FB17-053A557F4BCC',  #'1952AD09-578E-FCDB-62BC-C71C86E74CBC', splitss[coutofparser].split(" ")[2]
+                  'secret': '1D618594-38F2-8C42-5EF1-2B29146B9ABE'      #'EEC5222B-AEFE-96B3-9125-1928512E7C5B' splitss[coutofparser].split(" ")[3]
                   },
               headers=HEADERs
               )
