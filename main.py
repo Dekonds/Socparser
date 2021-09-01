@@ -9,7 +9,7 @@ coutofparser = 99
 no_visits = True
 
 HEADERs = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4297.0 Safari/537.36',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 YaBrowser/21.5.3.742 Yowser/2.5 Safari/537.36',
     'accept': '*/*'}
 
 
@@ -18,11 +18,13 @@ def get_html(url, params=None):
     strings = f.read()
     splitss = strings.split("\n")
     global coutofparser
+    print(coutofparser)
     s = requests.Session()
+    print(splitss[coutofparser].split(" ")[2]+" "+splitss[coutofparser].split(" ")[3])
     r = s.get(url, \
               cookies={
-                  'session_id': '8FBABDE6-234F-1F13-FB17-053A557F4BCC',  #'1952AD09-578E-FCDB-62BC-C71C86E74CBC', splitss[coutofparser].split(" ")[2]
-                  'secret': '8595BB40-D44C-BE89-3A53-2FCE2D95184F'      #'EEC5222B-AEFE-96B3-9125-1928512E7C5B' splitss[coutofparser].split(" ")[3]
+                  'session_id': splitss[coutofparser].split(" ")[2],  #'1952AD09-578E-FCDB-62BC-C71C86E74CBC', splitss[coutofparser].split(" ")[2]
+                  'secret': splitss[coutofparser].split(" ")[3]     #'EEC5222B-AEFE-96B3-9125-1928512E7C5B' splitss[coutofparser].split(" ")[3]
                   },
               headers=HEADERs
               )
@@ -40,14 +42,18 @@ def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find_all("div", class_="left")
     now = datetime.datetime.now()
+    f = open("file.html",'w',encoding = 'utf-8')
+    f.write(html)
+    f.close()
     global no_visits
     if (len(classes) == 0):
         if (no_visits == True):
             print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits")
             no_visits = False
-        else:
-            print("visits false")
-        time.sleep(200)
+        #else:
+            #print("visits false")
+        time.sleep(2)
+        no_visits = False
         gc.collect()
         return
     typeoflink = str(classes[1]).split()[8]
@@ -56,22 +62,23 @@ def get_content(html):
         print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " " + link + " direct")
         get_html(link + "&act=redirect")
         time.sleep(10)
+        
     else:
         print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " " + link + " " + typeoflink)
         get_html(link + "&act=redirect")
         time.sleep(int(typeoflink) + 10)
     no_visits = True 
     gc.collect()
+    parse()
 
 
 def get_content_username(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find("span", class_="username")
-    print("username on site " + classes.contents[0])
+   # print("username on site " + classes.contents[0])
 
 
 def parse():
-    # print(coutofparser)
     url = 'https://socpublic.com/account/visit.html'
     html = get_html(url)
     get_content(html.text)
@@ -100,12 +107,14 @@ def getip():
 
 def main():
     getip()
-    while 10 > 1:
-            parse()
-            gc.collect()
-
-
+    #while 10 > 1:
+     #       parse()
+      #      gc.collect()
+    for i in range(0,3):
+        global coutofparser
+        coutofparser = i
+        parse()
+    print("end")
+    
 print("")
 main()
-
-
