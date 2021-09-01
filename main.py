@@ -52,7 +52,7 @@ def get_content(html):
             no_visits = False
         #else:
             #print("visits false")
-        time.sleep(2)
+        time.sleep(200)
         no_visits = False
         gc.collect()
         return
