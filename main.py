@@ -75,7 +75,7 @@ def get_content(html):
 def get_content_username(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find("span", class_="username")
-   # print("username on site " + classes.contents[0])
+    print("username on site " + classes.contents[0])
 
 
 def parse():
@@ -107,14 +107,10 @@ def getip():
 
 def main():
     getip()
-    #while 10 > 1:
-     #       parse()
-      #      gc.collect()
-    for i in range(0,3):
-        global coutofparser
-        coutofparser = i
-        parse()
-    print("end")
+    while 10 > 1:
+            parse()
+            gc.collect()
+
     
 print("")
 main()
