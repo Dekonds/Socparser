@@ -12,7 +12,7 @@ HEADERs = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 YaBrowser/21.5.3.742 Yowser/2.5 Safari/537.36',
     'accept': '*/*'}
 
-
+print("aboba")
 def get_html(url, params=None):
     f = open('cfg', 'r')
     strings = f.read()
