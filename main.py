@@ -12,7 +12,6 @@ HEADERs = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 YaBrowser/21.5.3.742 Yowser/2.5 Safari/537.36',
     'accept': '*/*'}
 
-print("aboba")
 def get_html(url, params=None):
     f = open('cfg', 'r')
     strings = f.read()
@@ -20,7 +19,7 @@ def get_html(url, params=None):
     global coutofparser
     #print(coutofparser)
     s = requests.Session()
-    #print(splitss[coutofparser].split(" ")[2]+" "+splitss[coutofparser].split(" ")[3])
+    #print(splitss[coutofparser].split(" ")[1])
     r = s.get(url, \
               cookies={
                   'session_id': splitss[coutofparser].split(" ")[2],  #'1952AD09-578E-FCDB-62BC-C71C86E74CBC', splitss[coutofparser].split(" ")[2]
@@ -42,17 +41,17 @@ def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find_all("div", class_="left")
     now = datetime.datetime.now()
-    f = open("file.html",'w',encoding = 'utf-8')
-    f.write(html)
-    f.close()
+    #f = open("file.html",'w',encoding = 'utf-8')
+    #f.write(html)
+    #f.close()
     global no_visits
     if (len(classes) == 0):
         if (no_visits == True):
             print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits")
             no_visits = False
-        #else:
-            #print("visits false")
-        time.sleep(200)
+        else:
+            print("visits false")
+        time.sleep(20)
         no_visits = False
         gc.collect()
         return
@@ -107,10 +106,19 @@ def getip():
 
 def main():
     getip()
-    while 10 > 1:
-            parse()
-            gc.collect()
+    while True:
+        parse()
+        gc.collect()
 
-    
+
+def maintest():
+    global coutofparser
+    while True:
+        for x in range(1, 3):
+                coutofparser = x
+                parse()
+                gc.collect()
+
 print("")
 main()
+#maintest()
