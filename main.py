@@ -100,6 +100,8 @@ def getip():
             coutofparser = cfg_file.index(s)
             print("Logging as " + file_line[1])
             break
+        else:
+            global coutofparser = 2
     html2 = get_html('https://socpublic.com/account/visit.html')
     get_content_username(html2.text)
 
