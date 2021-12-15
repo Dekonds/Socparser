@@ -101,6 +101,7 @@ def getip():
             print("Logging as " + file_line[1])
             break
         else:
+            
             global coutofparser = 2
     html2 = get_html('https://socpublic.com/account/visit.html')
     get_content_username(html2.text)
@@ -121,6 +122,6 @@ def maintest():
                 parse()
                 gc.collect()
 
-print("")
+print("Aboba start")
 main()
 #maintest()
