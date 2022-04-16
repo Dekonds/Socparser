@@ -110,14 +110,13 @@ def main():
         gc.collect()
 
 
-def maintest():
-    global coutofparser
-    while True:
-        for x in range(1, 3):
-                coutofparser = x
-                parse()
-                gc.collect()
+#def maintest():
+   # global coutofparser
+    #while True:
+     #   for x in range(1, 3):
+               # coutofparser = x
+              #  parse()
+              #  gc.collect()
 
-print("Aboba start")
 main()
 #maintest()
