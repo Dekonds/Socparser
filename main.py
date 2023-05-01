@@ -5,34 +5,22 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-coutofparser = 99
 no_visits = True
 
-HEADERs = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 YaBrowser/21.5.3.742 Yowser/2.5 Safari/537.36',
-    'accept': '*/*'}
+HEADERs = {'user-agent': 'Mozilla/5.1 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 YaBrowser/21.5.3.742 Yowser/2.5 Safari/537.36','accept': '*/*'}
+proxys = {
+  'http':'89.223.121.208:3128'
+}
 
-def get_html(url, params=None):
-    f = open('cfg', 'r')
-    strings = f.read()
-    splitss = strings.split("\n")
-    global coutofparser
-    #print(coutofparser)
+def get_html(url):
+    jsonData = ""
+    with open('data.json') as jsonFile:
+        data = json.load(jsonFile)
+        jsonData = data['users']
     s = requests.Session()
-    #print(splitss[coutofparser].split(" ")[1])
-    r = s.get(url, \
-              cookies={
-                  'session_id': splitss[coutofparser].split(" ")[2]
-                  },
-              headers=HEADERs
-              )
-    return r
-
-def get_html_ip(url, params=None):
-    s = requests.Session()
-    r = s.get(url,
-              headers=HEADERs
-              )
+    #print(cookie_session)
+    #print(jsonData[0]['cookie'])
+    r = s.get(url, cookies={'session_id': jsonData[0]['cookie']},headers=HEADERs)#, proxies=proxys
     return r
 
 
@@ -40,16 +28,11 @@ def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find_all("div", class_="left")
     now = datetime.datetime.now()
-    #f = open("file.html",'w',encoding = 'utf-8')
-    #f.write(html)
-    #f.close()
     global no_visits
     if (len(classes) == 0):
         if (no_visits == True):
             print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits")
             no_visits = False
-        else:
-            print("visits false")
         time.sleep(20)
         no_visits = False
         gc.collect()
@@ -60,63 +43,30 @@ def get_content(html):
         print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " " + link + " direct")
         get_html(link + "&act=redirect")
         time.sleep(10)
-        
     else:
         print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " " + link + " " + typeoflink)
         get_html(link + "&act=redirect")
         time.sleep(int(typeoflink) + 10)
-    no_visits = True 
+    no_visits = True
     gc.collect()
     parse()
 
-
-def get_content_username(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    classes = soup.find("span", class_="username")
-    print("username on site " + classes.contents[0])
-
-
 def parse():
-    url = 'https://socpublic.com/account/visit.html'
+    url = 'http://socpublic.com/account/visit.html' #'http://socpublic.com/account/visit.html'
     html = get_html(url)
     get_content(html.text)
     gc.collect()
 
 
-def getip():
-    html = get_html_ip("https://ipwhois.app/json/")
-    ip_json = json.loads(html.text)
-    print("asn: "+str(ip_json['asn']))
-    print('ip: '+ip_json['ip'])
-    f = open('cfg', 'r')
-    strings = f.read()
-    cfg_file = strings.split("\n")
-    for s in cfg_file:
-        file_line = s.split(" ")
-        print(file_line[0]+" "+str(ip_json['asn']))
-        if (file_line[0] in str(ip_json['asn'])):
-            global coutofparser
-            coutofparser = cfg_file.index(s)
-            print("Logging as " + file_line[1])
-            break
-    html2 = get_html('https://socpublic.com/account/visit.html')
-    get_content_username(html2.text)
-
 
 def main():
-    getip()
     while True:
         parse()
         gc.collect()
 
 
-#def maintest():
-   # global coutofparser
-    #while True:
-     #   for x in range(1, 3):
-               # coutofparser = x
-              #  parse()
-              #  gc.collect()
 
+#session = requests.Session()
+#session.proxies = {"http": "89.223.121.208:3128"}
+#print("Страница запроса с IP:", session.get("http://ip.bablosoft.com/").text.strip())
 main()
-#maintest()
