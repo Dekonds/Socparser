@@ -60,6 +60,7 @@ def parse():
 
 
 def main():
+  print('abpba')
     while True:
         parse()
         gc.collect()
