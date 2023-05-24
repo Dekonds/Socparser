@@ -20,6 +20,7 @@ def get_html(url):
     s = requests.Session()
     #print(cookie_session)
     print(jsonData[0]['cookie'])
+    print(jsonData[0]['cookie'])
     r = s.get(url, cookies={'session_id': jsonData[0]['cookie']},headers=HEADERs)#, proxies=proxys
     return r
 
