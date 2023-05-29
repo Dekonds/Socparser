@@ -19,8 +19,7 @@ def get_html(url):
         jsonData = data['users']
     s = requests.Session()
     #print(cookie_session)
-    print(jsonData[0]['cookie'])
-    print(jsonData[0]['cookie'])
+    #print(jsonData[0]['cookie'])
     r = s.get(url, cookies={'session_id': jsonData[0]['cookie']},headers=HEADERs)#, proxies=proxys
     return r
 
@@ -28,10 +27,15 @@ def get_html(url):
 def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
     classes = soup.find_all("div", class_="left")
+    name = soup.find('span', class_='username')
+    if type(name) == type(None):
+        print('Not Logget')
+        time.sleep(100)
+        return
     now = datetime.datetime.now()
     global no_visits
-    if (len(classes) == 0):
-        if (no_visits == True):
+    if len(classes) == 0:
+        if no_visits == True:
             print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits")
             no_visits = False
         time.sleep(20)
@@ -40,7 +44,7 @@ def get_content(html):
         return
     typeoflink = str(classes[1]).split()[8]
     link = classes[0].findChildren()[1].attrs.get("href")
-    if (typeoflink == 'страницы'):
+    if typeoflink == 'страницы':
         print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " " + link + " direct")
         get_html(link + "&act=redirect")
         time.sleep(10)
@@ -53,7 +57,7 @@ def get_content(html):
     parse()
 
 def parse():
-    url = 'http://socpublic.com/account/visit.html' #'http://socpublic.com/account/visit.html'
+    url = 'http://socpublic.com/account/visit.html'
     html = get_html(url)
     get_content(html.text)
     gc.collect()
