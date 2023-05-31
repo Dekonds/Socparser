@@ -37,7 +37,7 @@ def get_content(html):
     global no_visits
     if len(classes) == 0:
         if no_visits == True:
-            print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits "+name)
+            print(str(now.hour) + ":" + str(now.minute) + ":" + str(now.second) + " No visits "+name.text)
             no_visits = False
         time.sleep(20)
         no_visits = False
