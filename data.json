@@ -3,16 +3,16 @@
 			  "name": "Dekond",
               "pass": "asdf1234",
 			  "key": "3911",
-			  "cookie": "832399C5-FF82-FB23-F9CA-35C50ABDB226",
-			  "proxy": "31.43.179.52:80"
+			  "cookie": "2490BEF0-DF38-BDF5-183F-B2CE5792130E",
+			  "proxy": null
 			  
              },
              {
-			  "name":"b",
-              "pass":"345",
-			  "key": "F8AA",
-			  "cookie": "",
-			  "proxy": "31.43.179.52:80"
+			  "name":"guldan2",
+              "pass":"asdf1234",
+			  "key": "",
+			  "cookie": "0EB7B0CE-56D4-2965-097E-FAAB079B7E3B",
+			  "proxy": "185.15.172.212:3128"
              }
 		 ]
 }
