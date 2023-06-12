@@ -8,3 +8,4 @@ requests ==          2.26.0
 setuptools==         57.1.0
 soupsieve   ==       2.2.1
 urllib3  ==          1.26.6
+selenium ==          4.9.1
