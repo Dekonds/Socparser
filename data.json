@@ -3,7 +3,7 @@
 			  "name": "Dekond",
               "pass": "asdf1234",
 			  "key": "3911",
-			  "cookie": "2212D742-3BEB-EC38-1273-7B7E951D254C",
+			  "cookie": "49E02981-824B-FEEE-F37C-9AC9EEFF5323",
 			  "proxy": null
 			  
              },
@@ -11,8 +11,8 @@
 			  "name":"guldan2",
               "pass":"asdf1234",
 			  "key": "",
-			  "cookie": "9FD5758D-EF17-8D45-C5AA-01C2296B7586",
-			  "proxy": "185.15.172.212:3128"
+			  "cookie": "A13A6C92-7F6C-08AF-EB80-E70B1511679F",
+			  "proxy": "185.108.4.222:3128"
              }
 		 ]
 }
